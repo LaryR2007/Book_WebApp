@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>List of Authors</h2>
+    <a href="{% url 'books:author_create' %}">Add a New Author</a>
+    <ul>
+        {% for author in authors %}
+            <li>{{ author.name }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'books:genre_list' %}">Back to Genres</a>
+{% endblock %}

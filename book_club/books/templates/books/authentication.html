@@ -1,0 +1,14 @@
+
+{% if user.is_authenticated %}
+<p>Authenticated    
+<pre>
+    Name: {{ user.get_full_name }}
+    ID: {{ user.id }}
+</pre>
+</p>
+<p>You can <a href="{% url 'books:logout' %}?next={{ 'books:logout' }}">Logout</a> if you like</p>
+<p>Want to go <a href="{% url 'books:genre_list' %}">Back?</a></p>
+{% else %}
+<p>You are not logged in</p>
+<p>You can <a href="{% url 'login' %}?next={{ request.path }}">Login</a> if you like</p>
+{% endif %}
