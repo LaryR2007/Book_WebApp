@@ -1,23 +1,66 @@
+/* Import a Google font for better typography */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
 body {
+    font-family: 'Roboto', sans-serif;
     margin: 4vw;
+    background-color: #121212; /* Dark background for the body */
+    color: #e0e0e0; /* Light gray text color for readability */
 }
+
 main {
     padding: 4vw;
-    border: 1px dotted #16425B;
+    border: 1px dotted #BB86FC; /* Lighter purple border for contrast */
+    background-color: #1E1E1E; /* Slightly lighter dark background for the content area */
+    color: #e0e0e0; /* Ensures text remains light on dark background */
+    display: grid;
+    grid-template-columns: 48vw 48vw;
+    grid-template-rows: auto;
+    gap: 2vw; /* Adding some space between the columns */
 }
+
 h1, footer {
     text-align: center;
+    color: #BB86FC; /* Lighter purple color for headings and footer */
 }
+
 footer {
     margin-top: 1vw;
+    font-size: 0.9rem; /* Slightly smaller text for the footer */
 }
+
 a, a:visited {
     text-decoration: none;
     font-weight: bold;
-    color: #D9DCD6; 
+    color: #BB86FC; /* Matching the purple theme */
 }
-main {
-  display: grid;
-  grid-template-columns: 48vw 48vw;
-  grid-template-rows: auto;
+
+a:hover {
+    color: #03DAC5; /* Teal color on hover for contrast */
 }
+
+a:active {
+    color: #3700B3; /* Dark purple on active links */
+}
+
+h1 {
+    font-size: 2.5rem; /* Larger font size for the main heading */
+    font-weight: 500;
+}
+
+footer {
+    font-size: 1rem;
+    color: #BB86FC;
+}
+
+/* Mobile adjustments for smaller screens */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 100%;
+        padding: 2vw;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+
