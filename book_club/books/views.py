@@ -5,6 +5,7 @@ from django.views import generic, View
 from .models import Book, Genre, Author
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from books.owner import OwnerListView, OwnerCreateView, OwnerDetailView, OwnerUpdateView, OwnerDeleteView
@@ -25,7 +26,7 @@ class GenreDetailView(generic.DetailView):
 class BookCreateForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['title', 'author', 'genres']
+        fields = ['title', 'author', 'genres', 'rating']
 
     author = forms.ModelChoiceField(queryset=Author.objects.all())
     genres = forms.ModelMultipleChoiceField(queryset=Genre.objects.all())
@@ -40,12 +41,28 @@ class BookCreateView(LoginRequiredMixin, generic.edit.CreateView):
         form.instance.owner = self.request.user  # Assign the current user as the owner of the book
         return super().form_valid(form)
 
+class BookDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Book
+    template_name = 'books/book_detail.html'
+    context_object_name = 'book'
+    success_url = reverse_lazy("books:genre_list")
+
+
 class BookDeleteView(OwnerDeleteView):
     model = Book
     template_name = 'books/book_confirm_delete.html'
     context_object_name = 'book'
     fields = '__all__'
     success_url = reverse_lazy("books:genre_list")  # Redirect after successful deletion
+
+class BookUpdateView(OwnerUpdateView):
+    model = Book
+    fields = ['title', 'author', 'genres', 'rating']
+    template_name = 'books/book_form.html'
+    context_object_name = 'book'
+
+    def get_success_url(self):
+        return reverse_lazy('books:book_detail', kwargs={'pk': self.object.pk})
     
 class AuthorCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = Author
@@ -65,8 +82,10 @@ class AuthorListView(generic.ListView):
     fields = '__all__'
     success_url = reverse_lazy("books:genre_list")
 
-class UserLogoutView(LogoutView):
-    template_name = 'books/logout.html'
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return render(request, 'registration/logout.html')
 
 
 class DumpPython(View):

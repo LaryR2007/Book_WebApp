@@ -3,7 +3,7 @@ body {
 }
 main {
     padding: 4vw;
-    border: 1px dotted #777;
+    border: 1px dotted #16425B;
 }
 h1, footer {
     text-align: center;
@@ -14,7 +14,7 @@ footer {
 a, a:visited {
     text-decoration: none;
     font-weight: bold;
-    color: #C92; 
+    color: #D9DCD6; 
 }
 main {
   display: grid;

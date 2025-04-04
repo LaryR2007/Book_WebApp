@@ -7,7 +7,7 @@
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>
-<a href="{% url 'books:genre_list' %}">Back to Genres</a>
+<a href="{% url 'books:genre_list'%}">Back to Genres</a>
 
 <p>Don't see the author? <a href="{% url 'books:author_create' %}">Add a New Author</a></p>
 {% endblock %}

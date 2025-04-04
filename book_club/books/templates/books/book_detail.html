@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Book Details</h2>
-    <h3>{{ book.title }}</h3>
-    <p><strong>Author:</strong> {{ book.author.name }}</p>
-    <p><strong>Genres:</strong>
+    <h2>{{ book.title }}</h2>
+    <a href="{% url 'books:book_update' book.pk %}">Edit Book</a>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    
+    <p><strong>Genres:</strong> 
         {% for genre in book.genres.all %}
             {{ genre.name }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
     </p>
+    <p><strong>Rating:</strong> {{ book.rating }}/10</p>
 
-    <a href="{% url 'books:book_update' book.pk %}">Edit Book</a> |
-    {% if book.owner == owner %}
-    <a href="{% url 'books:book_delete' book.pk %}">Delete this book</a>
-  {% endif %}
-
-    <a href="{% url 'books:genre_detail' book.genres.first.pk %}">Back to Genre</a>
+    <p><a href="{% url 'books:genre_detail' book.genres.first.pk %}">Back to Genre</a></p>
+    <p><a href="{% url 'books:book_delete' book.pk %}">Delete Book</a></p>
 {% endblock %}

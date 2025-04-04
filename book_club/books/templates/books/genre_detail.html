@@ -7,10 +7,10 @@
 <h3>Books in this Genre:</h3>
 <ul>
     {% for book in genre.book_set.all %}
-        <li>{{ book.title }} by {{ book.author }}</li>
+        <li><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }} by {{ book.author }}</a></li>
     {% endfor %}
 </ul>
 
 
-<a href="{% url 'books:genre_list' %}">Back to Genres</a>
+<a href="{% url 'books:genre_list'%}">Back to Genres</a>
 {% endblock %}

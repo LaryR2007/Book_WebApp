@@ -7,7 +7,6 @@ class Genre(models.Model):
     name = models.CharField(max_length=100, unique=True)
     def __str__(self):
         return self.name
-    
 
 class Author(models.Model):
     name = models.CharField(max_length=200)
@@ -24,6 +23,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     genres = models.ManyToManyField(Genre)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rating = models.IntegerField(null=True, blank=True)  # New field added
     
     def __str__(self):
         return self.title

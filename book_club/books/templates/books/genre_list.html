@@ -9,5 +9,5 @@
         </li>
     {% endfor %}
 </ul>
-
+<a href="{% url 'books:logout' %}?next={{ 'books:logout' }}">Logout</a>
 {% endblock %}
