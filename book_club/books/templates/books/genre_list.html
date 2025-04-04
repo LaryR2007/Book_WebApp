@@ -9,5 +9,8 @@
         </li>
     {% endfor %}
 </ul>
-<a href="{% url 'books:logout' %}?next={{ 'books:logout' }}">Logout</a>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'books:logout' %}?next={% url 'books:genre_list' %}">Logout</a>
+{% endif %}
 {% endblock %}
